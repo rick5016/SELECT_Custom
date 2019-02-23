@@ -1,0 +1,71 @@
+.select-head {
+    font-size: 14px;
+    color: #333c48;
+    cursor: pointer;
+    border: solid 1px #ccc;
+    background-color: #fff;
+    width: 100%;
+    text-align: left;
+    background-image: url(arrow-down.png);
+    background-repeat: no-repeat;
+    background-position: 96%;
+    height: 40px;
+    padding: 0 7px;
+}
+
+.select-head::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+}
+
+.selectblock {
+    border-bottom: solid 1px #ccc;
+    border-right: solid 1px #ccc;
+    border-left: solid 1px #ccc;
+    margin-top: -2px;
+    position:absolute;
+    max-height: 200px;
+    overflow-y: scroll;
+    width:315px;
+    box-sizing: border-box;
+}
+
+.select-container {
+    position:relative;
+    width: 315px;
+    float: left;
+}
+
+.select {
+    background-color: #fff;
+    list-style-type: none;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+.select li {
+    padding: 0 7px;
+    height: 20px;
+}
+
+.select li:hover {
+    background-color: #CCC;
+    cursor: pointer;
+}
+
+.select-hover {
+    background-color: #CCC;
+}
+
+.activeselect{
+    border: solid 0px #ccc;
+    border-top: solid 1px #ccc;
+    border-right: solid 1px #ccc;
+    border-left: solid 1px #ccc;
+}
