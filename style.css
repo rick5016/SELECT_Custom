@@ -1,4 +1,15 @@
-.select-head {
+.select-bloc {
+    position: relative;
+    height: 40px;
+}
+
+.select-container {
+    position: absolute;
+    width: auto;
+    background-color: #fff
+}
+
+.value-selected {
     font-size: 14px;
     color: #333c48;
     cursor: pointer;
@@ -13,34 +24,24 @@
     padding: 0 7px;
 }
 
-.select-head::after {
+.value-selected::after {
     display: inline-block;
     width: 0;
     height: 0;
-    margin-left: 0.255em;
-    vertical-align: 0.255em;
+    margin-left: 20px;
     content: "";
 }
 
-.selectblock {
+.select-list-container {
+    padding-right: 10px;
     border-bottom: solid 1px #ccc;
     border-right: solid 1px #ccc;
     border-left: solid 1px #ccc;
-    margin-top: -2px;
-    position:absolute;
     max-height: 200px;
     overflow-y: scroll;
-    width:315px;
-    box-sizing: border-box;
 }
 
-.select-container {
-    position:relative;
-    width: 315px;
-    float: left;
-}
-
-.select {
+.select-list {
     background-color: #fff;
     list-style-type: none;
     width: 100%;
@@ -49,12 +50,12 @@
     margin: 0;
 }
 
-.select li {
+.select-list li {
     padding: 0 7px;
     height: 20px;
 }
 
-.select li:hover {
+.select-list li:hover {
     background-color: #CCC;
     cursor: pointer;
 }
@@ -63,7 +64,7 @@
     background-color: #CCC;
 }
 
-.activeselect{
+.activeselect {
     border: solid 0px #ccc;
     border-top: solid 1px #ccc;
     border-right: solid 1px #ccc;
