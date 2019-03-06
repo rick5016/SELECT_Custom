@@ -10,30 +10,71 @@
 }
 
 .value-selected {
-    font-size: 14px;
+    display: block;
     color: #333c48;
     cursor: pointer;
     border: solid 1px #ccc;
     background-color: #fff;
-    width: 100%;
     text-align: left;
-    background-image: url(arrow-down.png);
-    background-repeat: no-repeat;
-    background-position: 96%;
-    height: 40px;
-    padding: 0 7px;
+    height: 30px;
+    padding: 10px 30px 0 7px;
+    font-size: 17px;
+}
+
+.value-selected.whithFixed {
+    width: 300px;
+}
+
+.value-selected:hover {
+    border-color: #000;
+}
+
+select:focus+.select-bloc>.select-container>label {
+    border-color: blue;
+}
+
+.value-selected::before {
+    content: "";
+    border-style: solid;
+    border-color: #535353;
+    border-width: 1px;
+    border-left: 0;
+    border-top: 0;
+    height: 10px;
+    width: 10px;
+    right: 10px;
+    top: 10px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    transition: opacity 0.2s ease-in-out;
+    position: absolute;
 }
 
 .value-selected::after {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 20px;
     content: "";
 }
 
+.value-selected:hover::after {
+    background: rgb(0, 119, 255, .1);
+    border-left: solid 1px #000;
+    height: 41px;
+    width: 28px;
+    right: 0;
+    position: absolute;
+    top: 0;
+}
+
+select:focus+.select-bloc>.select-container>.value-selected::after {
+    background: rgb(0, 119, 255, .1);
+    border-left: solid 1px #000;
+    height: 41px;
+    width: 28px;
+    right: 0;
+    position: absolute;
+    top: 0;
+}
+
 .select-list-container {
-    padding-right: 10px;
     border-bottom: solid 1px #ccc;
     border-right: solid 1px #ccc;
     border-left: solid 1px #ccc;
@@ -42,16 +83,15 @@
 }
 
 .select-list {
-    background-color: #fff;
+    white-space: nowrap;
     list-style-type: none;
-    width: 100%;
-    text-align: left;
     padding: 0;
     margin: 0;
 }
 
 .select-list li {
-    padding: 0 7px;
+    padding: 0 24px 0 7px;
+    margin-left: 1px;
     height: 20px;
 }
 

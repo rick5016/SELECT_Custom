@@ -1,40 +1,90 @@
 jQuery(function () {
 
-    /**
-     * Gestion de la selection des select
-     * Info : blur prend le pas sur click, mousedown passe avant le blur
-     */
-    $(".select-list").on('mousedown', 'li', function () {
-        var parentUL = $(this).parent('ul');
-        var parentDIV = parentUL.parent('div');
-        var selectID = parentUL.attr('class').split("select ")[1];
-        parentDIV.prev('button').html($(this).html());
+    // Toggle custom select container
+    function toggleSelectListContainer(selectListContainer) {
+        var visibility = selectListContainer.css('visibility');
 
-
-        //parentDIV.toggle();
-        var visibility = parentDIV.css('visibility');
-
-        if (visibility === 'hidden')
-        {
-            parentDIV.css('visibility', 'initial');
-            parentDIV.css('height', '80px');
+        if (visibility === 'hidden') {
+            selectListContainer.css('visibility', 'initial');
+            selectListContainer.css('height', '200px');
         } else {
-            parentDIV.css('visibility', 'hidden');
-            parentDIV.css('height', '0px');
+            hideSelectListContainer(selectListContainer);
         }
+    }
 
+    // Hide custom select container
+    function hideSelectListContainer(selectListContainer) {
+        selectListContainer.css('visibility', 'hidden');
+        selectListContainer.css('height', '0px');
+    }
+
+    // Toggle custom select on click
+    $(document.body).on('click', '.value-selected', function () {
+        toggleSelectListContainer($(this).next('div'));
+
+        // multiple select on page
+        var zindex = 900;
+        $(".select-bloc").each(function () {
+            zindex = --zindex;
+            $(this).css('z-index', zindex);
+        });
+    });
+
+    // select option in the custom select container
+    $(".select-list").on('mousedown', 'li', function () {
+        var selectList = $(this).parent('ul');
+        var selectListContainer = selectList.parent('div');
+        var selectID = selectList.attr('class').split("select-list ")[1];
+        selectListContainer.prev('button').html($(this).html());
+
+        toggleSelectListContainer(selectListContainer);
 
         $("#" + selectID).val($(this).attr('value'));
         $("#" + selectID).change();
     });
 
-    // Cache le select quand on clique en dehors
-    $(document.body).on('blur', '.value-selected', function () {
-        $( this ).next('div').css('visibility', 'hidden');
-        $( this ).next('div').css('height', '0px');
+    // Hide custom select container on click outside
+    $(document.body).on('blur', 'select', function () {
+        var selectBloc = $(this).next('div');
+        var selectContainer = selectBloc.children('div');
+        var selectListContainer = selectContainer.children('div');
+
+        hideSelectListContainer(selectListContainer);
     });
 
-    // Recherche, déplacement puis sélection de l'élément ayant la premiere lettre de la touche pressée dans le select
+    // Change custom select value with arrows on focus
+    $(document.body).on('change', 'select', function () {
+        var opt = $(this).children('option:selected');
+
+        var selectBloc = $(this).next('div');
+        var selectContainer = selectBloc.children('div');
+        var label = selectContainer.children('label');
+
+        label.html(opt.text());
+    });
+
+    // TODO : select value whith enter
+    $('.select-bloc').keyup(function (e)
+    //$(".select-bloc").on('keyup', 'ul', function ()
+    {
+        console.log(e.keyCode);
+        console.log(e.which);
+        if (e.keyCode == 13) { // enter
+
+        }
+    });
+    /*$('.select_custom').keypress(function(e){
+    });*/
+
+
+
+
+
+
+
+
+
+    // In progress : Recherche, déplacement puis sélection de l'élément ayant la premiere lettre de la touche pressée dans le select
     $('.value-selected').keypress(function (e) {
         var touche = String.fromCharCode(e.which);
         var DIV = $(this).next('div'); //select-list-container
@@ -67,33 +117,5 @@ jQuery(function () {
         DIV.prev('button').html(elem.html());
         $("#" + selectID).val(elem.attr('value'));
         $("#" + selectID).change();
-    });
-
-    // Select : Reset du CSS des éléments si on bouge la souris
-    $('.select-bloc').on('mousemove', 'ul', function () {
-        $(this).children('li').each(function () {
-            $(this).removeClass('select-hover');
-        });
-    });
-
-    // Select : Gestion du z-index de chaque select de la page
-    $(document.body).on('click', '.value-selected', function () {
-        //$(this).next('div').toggle();
-        var visibility = $( this ).next('div').css('visibility');
-
-        if (visibility === 'hidden')
-        {
-            $( this ).next('div').css('visibility', 'initial');
-            $( this ).next('div').css('height', '80px');
-        } else {
-            $( this ).next('div').css('visibility', 'hidden');
-            $( this ).next('div').css('height', '0px');
-        }
-
-        var zindex = 900;
-        $(".select-bloc").each(function () {
-            zindex = --zindex;
-            $(this).css('z-index', zindex);
-        });
     });
 });
