@@ -5,18 +5,9 @@ select {
     height: 0px;
 }
 
-select:focus {
-    background-color: red;
-}
-
 .select-bloc {
     position: relative;
     height: 40px;
-}
-
-.select-container {
-    width: auto;
-    background-color: #fff
 }
 
 .value-selected {
@@ -31,17 +22,10 @@ select:focus {
     font-size: 17px;
 }
 
-.value-selected.whithFixed {
-    min-width: 300px;
-}
-
-.value-selected:hover {
+.value-selected:hover,
+select:focus+.select-bloc>label+.select-list-container,
+select:focus+.select-bloc>label {
     border-color: #000;
-}
-
-select:focus+.select-bloc>.select-container>label+.select-list-container,
-select:focus+.select-bloc>.select-container>label {
-    border-color: blue;
 }
 
 .value-selected::before {
@@ -65,17 +49,8 @@ select:focus+.select-bloc>.select-container>label {
     content: "";
 }
 
+select:focus+.select-bloc>.value-selected::after,
 .value-selected:hover::after {
-    background: rgb(0, 119, 255, .1);
-    border-left: solid 1px #000;
-    height: 41px;
-    width: 28px;
-    right: 0;
-    position: absolute;
-    top: 0;
-}
-
-select:focus+.select-bloc>.select-container>.value-selected::after {
     background: rgb(0, 119, 255, .1);
     border-left: solid 1px #000;
     height: 41px;
@@ -89,7 +64,6 @@ select:focus+.select-bloc>.select-container>.value-selected::after {
     border-bottom: solid 1px #ccc;
     border-right: solid 1px #ccc;
     border-left: solid 1px #ccc;
-    max-height: 200px;
     overflow-y: scroll;
 }
 
@@ -98,6 +72,7 @@ select:focus+.select-bloc>.select-container>.value-selected::after {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    background-color: #fff;
 }
 
 .select-list li {
@@ -106,20 +81,14 @@ select:focus+.select-bloc>.select-container>.value-selected::after {
     height: 20px;
 }
 
+.select-hover,
 .select-list li:hover {
     background-color: #CCC;
     cursor: pointer;
 }
 
-.select-hover {
-    background-color: #CCC;
-}
-
-.activeselect {
-    border: solid 0px #ccc;
-    border-top: solid 1px #ccc;
-    border-right: solid 1px #ccc;
-    border-left: solid 1px #ccc;
+.value-selected.whithFixed {
+    min-width: 300px;
 }
 
 .label {

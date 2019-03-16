@@ -9,14 +9,13 @@ jQuery(function () {
         }
     });
 
-
     // Toggle custom select container
     function toggleSelectListContainer(selectListContainer) {
         var visibility = selectListContainer.css('visibility');
 
         if (visibility === 'hidden') {
             selectListContainer.css('visibility', 'initial');
-            selectListContainer.css('max-height', '200px');
+            selectListContainer.css('max-height', '420px');
         } else {
             hideSelectListContainer(selectListContainer);
         }
@@ -28,25 +27,20 @@ jQuery(function () {
         selectListContainer.css('max-height', '0px');
     }
 
-    function getSelectID(selectList) {
-        return selectList.attr('class').split("select-list ")[1];
-    }
-
     // Toggle custom select on click
     $(document.body).on('click', '.value-selected', function () {
         var selectListContainer = $(this).next('div');
         var selectList = selectListContainer.children('ul');
-        var thisSelectID = getSelectID(selectList);
+        var thisSelectID = selectList.attr('class').split("select-list ")[1];
 
         toggleSelectListContainer($(this).next('div'));
 
         // multiple select on page
         var zindex = 900;
         $(".select-bloc").each(function () {
-            var selectContainer = $(this).children('.select-container');
-            var selectListContainer = selectContainer.children('div');
+            var selectListContainer = $(this).children('.select-list-container');
             var selectList = selectListContainer.children('ul');
-            var selectID = getSelectID(selectList);
+            var selectID = selectList.attr('class').split("select-list ")[1];
             if (selectID !== thisSelectID) {
                 hideSelectListContainer(selectListContainer);
             }
@@ -59,7 +53,7 @@ jQuery(function () {
     $(document.body).on('mousedown', 'li', function () {
         var selectList = $(this).parent('ul');
         var selectListContainer = selectList.parent('div');
-        var selectID = getSelectID(selectList);
+        var selectID = selectList.attr('class').split("select-list ")[1];
         selectListContainer.prev('button').html($(this).html());
 
         toggleSelectListContainer(selectListContainer);
@@ -73,8 +67,7 @@ jQuery(function () {
         var opt = $(this).children('option:selected');
 
         var selectBloc = $(this).next('div');
-        var selectContainer = selectBloc.children('div');
-        var label = selectContainer.children('label');
+        var label = selectBloc.children('.value-selected');
         var selectListContainer = label.next('div');
         var selectList = selectListContainer.children('ul');
         var element = selectList.children('li[value="' + opt.val() + '"]');
@@ -94,8 +87,7 @@ jQuery(function () {
     $('select').keyup(function (e) {
         if (e.keyCode == 13) {
             var selectBloc = $(this).next('div');
-            var selectContainer = selectBloc.children('div');
-            var label = selectContainer.children('label');
+            var label = selectBloc.children('.value-selected');
             var selectListContainer = label.next('div');
             hideSelectListContainer(selectListContainer);
         }
