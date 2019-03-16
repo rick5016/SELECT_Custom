@@ -77,7 +77,6 @@ jQuery(function () {
             $(selectListContainer).scrollTop(0);
             $(selectListContainer).scrollTop(element.position().top - 44);
             selectList.children('li').removeClass('select-hover');
-            //$('li').removeClass('select-hover');
             element.addClass('select-hover');
         }
 
