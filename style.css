@@ -5,6 +5,10 @@ select {
     height: 0px;
 }
 
+select:focus {
+    background-color: red;
+}
+
 .select-bloc {
     position: relative;
     height: 40px;

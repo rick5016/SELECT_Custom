@@ -1,4 +1,15 @@
 jQuery(function () {
+
+    // Hide custom select
+    $(document).click(function (event) {
+        if (!$(event.target).closest('.select_custom').length) {
+            $(".select-list-container").each(function () {
+                hideSelectListContainer($(this));
+            });
+        }
+    });
+
+
     // Toggle custom select container
     function toggleSelectListContainer(selectListContainer) {
         var visibility = selectListContainer.css('visibility');
