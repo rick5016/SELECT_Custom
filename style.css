@@ -1,10 +1,16 @@
+select {
+    opacity: 0;
+    position: absolute;
+    width: 0px;
+    height: 0px;
+}
+
 .select-bloc {
     position: relative;
     height: 40px;
 }
 
 .select-container {
-    position: absolute;
     width: auto;
     background-color: #fff
 }
@@ -22,13 +28,14 @@
 }
 
 .value-selected.whithFixed {
-    width: 300px;
+    min-width: 300px;
 }
 
 .value-selected:hover {
     border-color: #000;
 }
 
+select:focus+.select-bloc>.select-container>label+.select-list-container,
 select:focus+.select-bloc>.select-container>label {
     border-color: blue;
 }
@@ -109,4 +116,15 @@ select:focus+.select-bloc>.select-container>.value-selected::after {
     border-top: solid 1px #ccc;
     border-right: solid 1px #ccc;
     border-left: solid 1px #ccc;
+}
+
+.label {
+    padding-top: 10px;
+    padding-right: 5px;
+    width: 150px
+}
+
+.some_text {
+    margin: 0;
+    padding: 10px 0px 0px 10px;
 }
