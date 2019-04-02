@@ -26,9 +26,30 @@ jQuery(function () {
         selectListContainer.css('visibility', 'hidden');
         selectListContainer.css('max-height', '0px');
     }
+    // Select value in custom select
+    function selectValueInCustomSelect(select) {
+        var opt = select.children('option:selected');
+
+        var selectBloc = select.next('div');
+        var label = selectBloc.children('.value-selected');
+        var selectListContainer = label.next('div');
+        var selectList = selectListContainer.children('ul');
+        var element = selectList.children('li[value="' + opt.val() + '"]');
+
+        if (element !== 'undefined') {
+            $(selectListContainer).scrollTop(0);
+            $(selectListContainer).scrollTop(element.position().top - 44);
+            selectList.children('li').removeClass('select-hover');
+            element.addClass('select-hover');
+        }
+    }
 
     // Toggle custom select on click
     $(document.body).on('click', '.value-selected', function () {
+        var selectBloc = $(this).parent('.select-bloc');
+        var select = selectBloc.prev('select');
+        selectValueInCustomSelect(select);
+
         var selectListContainer = $(this).next('div');
         var selectList = selectListContainer.children('ul');
         var thisSelectID = selectList.attr('class').split("select-list ")[1];
@@ -64,22 +85,13 @@ jQuery(function () {
 
     // Change custom select value with arrows on focus
     $(document.body).on('change', 'select', function () {
-        var opt = $(this).children('option:selected');
 
         var selectBloc = $(this).next('div');
+        var select = selectBloc.prev('select');
+        selectValueInCustomSelect(select);
+
         var label = selectBloc.children('.value-selected');
-        var selectListContainer = label.next('div');
-        var selectList = selectListContainer.children('ul');
-        var element = selectList.children('li[value="' + opt.val() + '"]');
-
-        // Select value in custom select
-        if (element !== 'undefined') {
-            $(selectListContainer).scrollTop(0);
-            $(selectListContainer).scrollTop(element.position().top - 44);
-            selectList.children('li').removeClass('select-hover');
-            element.addClass('select-hover');
-        }
-
+        var opt = $(this).children('option:selected');
         label.html(opt.text());
     });
 
